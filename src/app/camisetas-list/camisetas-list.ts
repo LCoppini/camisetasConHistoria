@@ -7,6 +7,7 @@ import { Camiseta } from './Camiseta';
   templateUrl: './camisetas-list.html',
   styleUrl: './camisetas-list.scss',
 })
+
 export class CamisetasList implements OnInit {
   
   // Agregamos una propiedad simulada de "stock" para controlar el límite del Up
@@ -51,13 +52,17 @@ export class CamisetasList implements OnInit {
       "brand" : "Adidas", 
       "price" : 300000, 
       "image" : "/img/messi2006.jpg", 
-      "quantity" : 0, 
+      "quantity" : 10, 
       "clearence" : true,
       "stock": 4
     }
   ];
 
   ngOnInit(): void {
+  }
+
+  maxReached(mensaje: string): void {
+    alert(mensaje);
   }
 
   // Método para el botón de Añadir

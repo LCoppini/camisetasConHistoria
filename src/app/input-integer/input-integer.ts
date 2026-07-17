@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Camiseta } from '../camisetas-list/Camiseta';
 
 @Component({
@@ -9,42 +9,53 @@ import { Camiseta } from '../camisetas-list/Camiseta';
 })
 export class InputInteger implements OnInit {
   
-  // El constructor vacío como el del profe
   constructor() {}
 
-  // Agregamos '!' para solucionar el error de TypeScript
   @Input()
   quantity!: number;
+
+  @Output()
+  quantityChange = new EventEmitter<number>();
+
+  // 1. Creamos el nuevo evento para avisar que se llegó al máximo
+  @Output()
+  maxReached = new EventEmitter<string>();
 
   @Input()
   max!: number;
 
-  // El método obligatorio del OnInit que te faltaba
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  // Cambié 'any' por 'Camiseta' para seguir el tipado estricto del profe
   upQuantity(): void {
     if (this.quantity < this.max) {
       this.quantity++;
+      this.quantityChange.emit(this.quantity);
     } 
+    else {
+      this.maxReached.emit(`Se ha alcanzado el límite máximo de stock (${this.max} unidades).`);
+    }
   }
 
-  downQuantity(camiseta: Camiseta): void {
+  downQuantity(): void {
     if (this.quantity > 0) {
       this.quantity--;
+      this.quantityChange.emit(this.quantity);
     }
   }
 
-  changeQuantity(event: any, camiseta: Camiseta): void {
+  changeQuantity(event: any): void {
     console.log(event.key); 
 
-    if (camiseta.quantity > camiseta.stock) {
-      camiseta.quantity = camiseta.stock; 
+    if (this.quantity > this.max) {
+      this.quantity = this.max; 
+      // Opcional: También podrías disparar el evento aquí si lo escriben a mano
+      this.maxReached.emit(`No puedes superar el stock máximo de ${this.max}.`);
     }
 
-    if (camiseta.quantity < 0) {
-      camiseta.quantity = 0; 
+    if (this.quantity < 0) {
+      this.quantity = 0; 
     }
+
+    this.quantityChange.emit(this.quantity);
   }
 }
