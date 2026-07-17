@@ -1,3 +1,32 @@
-<div>
-    <h1>Hellooooo</h1>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Camisetas con Historia</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <a class="nav-link" href="#">Features</a>
+        <a class="nav-link" href="#">Pricing</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <!-- CORRECCIÓN: El div class="row" envuelve y agrupa ambas columnas -->
+  <div class="row">
+    
+    <!-- Columna izquierda para la lista de camisetas (Ocupa 8 de 12) -->
+    <div class="col-lg-8 col-md-12 mb-4">
+      <app-camisetas-list></app-camisetas-list>
+    </div>
+    
+    <!-- Columna derecha para el carrito de compras (Ocupa 4 de 12) -->
+    <div class="col-lg-4 col-md-12">
+      <app-camisetas-carrito></app-camisetas-carrito>
+    </div>
+
+  </div> <!-- Aquí se cierra correctamente la fila -->
 </div>

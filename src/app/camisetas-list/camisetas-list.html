@@ -1,0 +1,19 @@
+<div class="camisetas-container">
+  
+  <!-- Recorremos la lista de camisetas -->
+  @for (item of camisetas; track item.team) {
+    <div class="camiseta-card">
+      <div class="image-wrapper">
+        <!-- Vinculamos la imagen de cada una -->
+        <img [src]="item.image" alt="Camiseta de fútbol">
+      </div>
+      <div class="camiseta-info">
+        <h3>{{ item.team }}</h3>
+        <p class="player">{{ item.player }}</p>
+        <p class="details">Marca: {{ item.brand }} | Año: {{ item.year }}</p>
+        <span class="price">${{ item.price }}</span>
+      </div>
+    </div>
+  }
+  
+</div>
