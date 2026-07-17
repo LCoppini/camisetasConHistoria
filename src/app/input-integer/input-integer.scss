@@ -1,0 +1,21 @@
+// input-integer.scss
+
+.form-control.text-center {
+  &[type="number"] { // Apunta específicamente al input de tipo número
+    width: 55px;
+    height: 31px;
+    font-weight: bold;
+    padding: 0;
+    margin-left: auto;  // Esto reemplaza al 'mx-auto' de Bootstrap si prefieres
+    margin-right: auto; // quitarlo del HTML, aunque puedes dejar las clases nativas.
+
+    // Opcional: Ocultar las flechas arriba/abajo nativas del navegador (spinners)
+    appearance: textfield; 
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      background: transparent;
+      appearance: none;
+      margin: 0;
+    }
+  }
+}

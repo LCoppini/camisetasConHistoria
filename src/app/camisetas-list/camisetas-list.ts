@@ -60,37 +60,6 @@ export class CamisetasList implements OnInit {
   ngOnInit(): void {
   }
 
-  // Incrementa la cantidad asegurando que no supere el stock disponible
-  upQuantity(camiseta: any): void {
-    if (camiseta.quantity < camiseta.stock) {
-      camiseta.quantity++;
-    } else {
-      alert(`No puedes agregar más unidades. El stock máximo es de ${camiseta.stock}.`);
-    }
-  }
-
-  // Decrementa la cantidad controlando que nunca baje de 0
-  downQuantity(camiseta: any): void {
-    if (camiseta.quantity > 0) {
-      camiseta.quantity--;
-    }
-  }
-
-
-  changeQuantity(event: any, camiseta: Camiseta): void {
-    console.log(event.key); 
-
-    // Controlamos el campo de forma simple directamente con las propiedades del objeto
-    if (camiseta.quantity > camiseta.stock) {
-      camiseta.quantity = camiseta.stock; // Si se pasa del stock, lo frena en el límite máximo
-    }
-
-    if (camiseta.quantity < 0) {
-      camiseta.quantity = 0; // Si pone un numero negativo, lo resetea a cero
-    }
-  }
-
-
   // Método para el botón de Añadir
   addToCart(camiseta: any): void {
     console.log('Añadido al carrito:', camiseta);
