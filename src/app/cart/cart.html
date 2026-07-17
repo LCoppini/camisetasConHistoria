@@ -1,0 +1,67 @@
+<div class="container mt-4">
+  <h3 class="mb-3 fw-bold">🛒 Mi Carrito</h3>
+
+  <!-- Uso de *ngIf clásico con tu variable 'carrito' -->
+  <div *ngIf="carrito.length > 0; else carritoVacio">
+    
+    <!-- Lista simple de productos sin estilos en línea -->
+    <ul class="w-100 ps-0 list-group list-group-flush mb-3">
+      
+      <!-- Bucle clásico *ngFor manteniendo el índice 'i' -->
+      <li class="list-group-item d-flex align-items-center justify-content-between py-3 border-bottom border-1" 
+          *ngFor="let item of carrito; let i = index">
+        
+        <!-- Detalle de la camiseta (Imagen y textos) -->
+        <div class="d-flex align-items-center gap-3 project-item-detail">
+          <img [src]="item.image" [alt]="item.team" class="cart-thumb img-fluid">
+          <div>
+            <span class="fw-bold d-block">{{ item.team }} - {{ item.player }}</span>
+            <small class="text-muted d-block">Marca: {{ item.brand }} | Año: {{ item.year }}</small>
+            <small class="text-muted">Precio: ${{ item.price.toFixed(3) }} c/u</small>
+          </div>
+        </div>
+
+        <!-- Controladores de Cantidad -->
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-xs btn-outline-secondary px-2" (click)="decrementarCantidad(i)">-</button>
+          <span class="fw-bold px-1">{{ item.quantity }}</span>
+          <button class="btn btn-xs btn-outline-secondary px-2" (click)="incrementarCantidad(i)">+</button>
+        </div>
+
+        <!-- Subtotal por camiseta y botón eliminar -->
+        <div class="d-flex align-items-center gap-3">
+          <span class="fw-bold text-success">${{ (item.price * item.quantity).toFixed(3) }}</span>
+          <button class="btn btn-sm btn-outline-danger p-1" (click)="eliminarProducto(i)">
+            🗑️
+          </button>
+        </div>
+
+      </li>
+    </ul>
+
+    <!-- Bloque inferior de compra simplificado -->
+    <div class="p-3 bg-light rounded-3 d-flex justify-content-between align-items-center border">
+      <div>
+        <h5 class="mb-0 fw-bold">Total: <span class="text-success">${{ totalCompra.toFixed(3) }}</span></h5>
+        <small class="text-muted">Productos: {{ carrito.length }} | Envío Gratis</small>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-sm btn-link text-danger text-decoration-none" (click)="limpiarCarrito()">
+          Vaciar
+        </button>
+        <button class="btn btn-primary px-4 fw-bold shadow-sm">
+          Comprar
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Plantilla alternativa si está vacío -->
+  <ng-template #carritoVacio>
+    <div class="text-center py-4 bg-white rounded-3 border">
+      <div class="fs-2 mb-2">🛒</div>
+      <h5 class="fw-bold text-muted mb-0">Tu carrito está vacío</h5>
+    </div>
+  </ng-template>
+</div>

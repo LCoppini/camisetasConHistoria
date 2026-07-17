@@ -12,12 +12,12 @@ interface CamisetaItem {
 }
 
 @Component({
-  selector: 'app-camisetas-carrito',
+  selector: 'app-cart', // MODIFICADO: Selector simplificado
   standalone: false,
-  templateUrl: './camisetas-carrito.html',
-  styleUrl: './camisetas-carrito.scss',
+  templateUrl: './cart.html', // MODIFICADO: Ruta al nuevo archivo HTML
+  styleUrl: './cart.scss', // MODIFICADO: Ruta al nuevo archivo SCSS
 })
-export class CamisetasCarrito implements OnInit {
+export class CartComponent implements OnInit { // MODIFICADO: Nombre de clase más limpio
 
   // Lista de productos cargados actualmente en el carrito de compras
   carrito: CamisetaItem[] = [
@@ -26,7 +26,7 @@ export class CamisetasCarrito implements OnInit {
       "player": "Messi",
       "year": 2006, 
       "brand": "Adidas", 
-      "price": 300.000, 
+      "price": 300000, 
       "image": "/img/messi2006.jpg",
       "quantity": 1
     },
@@ -35,7 +35,7 @@ export class CamisetasCarrito implements OnInit {
       "player": "Olise",
       "year": 2026, 
       "brand": "Nike", 
-      "price": 180.000, 
+      "price": 180000, 
       "image": "/img/Francia2026.jpg",
       "quantity": 2
     }
@@ -76,4 +76,3 @@ export class CamisetasCarrito implements OnInit {
     this.carrito = [];
   }
 }
-

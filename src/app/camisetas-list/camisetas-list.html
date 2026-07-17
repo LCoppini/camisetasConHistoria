@@ -1,19 +1,83 @@
-<div class="camisetas-container">
-  
-  <!-- Recorremos la lista de camisetas -->
-  @for (item of camisetas; track item.team) {
-    <div class="camiseta-card">
-      <div class="image-wrapper">
-        <!-- Vinculamos la imagen de cada una -->
-        <img [src]="item.image" alt="Camiseta de fútbol">
-      </div>
-      <div class="camiseta-info">
-        <h3>{{ item.team }}</h3>
-        <p class="player">{{ item.player }}</p>
-        <p class="details">Marca: {{ item.brand }} | Año: {{ item.year }}</p>
-        <span class="price">${{ item.price }}</span>
-      </div>
-    </div>
-  }
-  
-</div>
+<h3 class="mt-4 mb-3 fw-bold">👕 Camisetas Disponibles</h3>
+
+<table class="table text-center align-middle">
+  <thead>
+    <tr>
+      <th>Modelo / Jugador</th>
+      <th>Marca</th>
+      <th>Año</th>
+      <th>Precio</th>
+      <th>Stock</th>
+      <th>Imagen</th>
+      <th>Cantidad</th>
+      <th>Comprar</th>
+    </tr>
+  </thead>
+  <tbody>
+   
+    <!-- Bucle principal de camisetas -->
+    <tr *ngFor="let camiseta of camisetas" [class.clearance]="camiseta.clearence">
+      
+      <!-- Datos básicos -->
+      <td class="fw-bold">{{ camiseta.team }} - {{ camiseta.player }}</td>
+      <td>{{ camiseta.brand }}</td>
+      <td>{{ camiseta.year }}</td>
+      <td class="text-success fw-bold">{{ camiseta.price | currency }}</td>
+
+      <!-- Muestra el stock real de forma condicional -->
+      <td>
+        <span *ngIf="camiseta.stock > 0; else sinStock" class="badge bg-success">
+          {{ camiseta.stock }} u.
+        </span>
+        <ng-template #sinStock>
+          <span class="badge bg-danger">SIN STOCK</span>
+        </ng-template>
+      </td>
+
+      <!-- Imagen -->
+      <td>
+        <div class="table-image-container">
+          <img [src]="camiseta.image" [alt]="camiseta.team" class="img-fluid">
+        </div>
+      </td>
+
+      <!-- MODIFICADO: Celda con Botones e Input bidireccional [(ngModel)] sincronizado -->
+      <td>
+        <div class="d-flex align-items-center justify-content-center gap-2">
+          <!-- Botón de menos (-) -->
+          <button type="button" class="btn btn-primary btn-sm px-2 fw-bold" (click)="downQuantity(camiseta)">
+            -
+          </button>
+          
+          <!-- Input interactivo enlazado a la propiedad quantity -->
+          <!-- Input interactivo enlazado únicamente con ngModel -->
+<input type="number" 
+       class="form-control text-center mx-auto" 
+       [(ngModel)]="camiseta.quantity" 
+       (keyup)="changeQuantity($event, camiseta)"
+       style="width: 55px; height: 31px; font-weight: bold; padding: 0;">
+
+          
+          <!-- Botón de más (+) -->
+          <button type="button" class="btn btn-primary btn-sm px-2 fw-bold" (click)="upQuantity(camiseta)">
+            +
+          </button>
+        </div>
+      </td>
+
+      <!-- Botón de acción para añadir al carrito -->
+      <td>
+        <button class="btn btn-primary btn-sm px-3 shadow-sm" 
+                (click)="addToCart(camiseta)" 
+                [disabled]="camiseta.stock === 0 || camiseta.quantity === 0">
+          Añadir
+        </button>
+      </td>
+    </tr>
+
+    <!-- Mensaje de lista vacía -->
+    <tr *ngIf="camisetas.length === 0">
+      <td colspan="8" class="text-muted py-4">No hay camisetas disponibles en este momento.</td>
+    </tr>
+  </tbody>
+</table>

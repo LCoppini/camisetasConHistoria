@@ -1,0 +1,12 @@
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  font-size: 1.725rem; // Incrementado un 50% (de 1.15rem)
+  gap: 0.6rem;         // Incrementado un 50% (de 0.4rem)
+
+  .home-icon {
+    height: 4.7rem;    // Incrementado un 50% (de 1.6rem)
+    width: auto;       
+    object-fit: contain;
+  }
+}

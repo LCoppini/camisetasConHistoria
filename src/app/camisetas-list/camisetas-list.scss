@@ -1,86 +1,120 @@
-// 1. Contenedor principal que agrupa todas las tarjetas
-.camisetas-container {
-  display: flex;
-  flex-wrap: wrap;       // Permite que las tarjetas bajen a la siguiente fila si no hay espacio
-  gap: 24px;             // Espaciado uniforme entre las tarjetas
-  padding: 24px;
-  justify-content: flex-start; // Alinea las tarjetas al inicio de la fila
-  background-color: #f8f9fa;   // Fondo gris claro sutil
-}
-
-// 2. Estructura de cada tarjeta individual
-.camiseta-card {
-  // Restamos el espacio proporcional del gap para que entren exactamente 4 por fila
-  width: calc(25% - 18px); 
-  min-width: 230px;      // Evita que se deformen o se encojan demasiado en pantallas medianas
-  box-sizing: border-box;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+// Contenedor general de la tabla para aplicar bordes redondeados modernos
+table.table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid #e9ecef;
   border-radius: 12px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden; // Corta las esquinas para mantener el redondeado
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 
-  // Efecto visual interactivo al pasar el mouse por encima
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  // Estilos para el encabezado de la tabla
+  thead {
+    tr {
+      background-color: #f8f9fa;
+      
+      th {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 700;
+        color: #495057;
+        padding: 16px;
+        border-bottom: 2px solid #dee2e6;
+      }
+    }
+  }
+
+  // Estilos para el cuerpo de la tabla
+  tbody {
+    tr {
+      transition: background-color 0.2s ease;
+
+      // Efecto sutil al pasar el mouse sobre una fila normal
+      &:hover {
+        background-color: #fdfdfd;
+      }
+
+      td {
+        padding: 16px;
+        color: #4a5568;
+        border-bottom: 1px solid #edf2f7;
+      }
+
+      // Elimina el borde de la última fila para que no rompa el diseño redondeado
+      &:last-child td {
+        border-bottom: none;
+      }
+    }
+
+    // MODIFICADO: Relleno verde intermedio con mayor presencia e intensidad
+    tr.clearance {
+      background-color: #bbf7d0 !important; // Verde menta intermedio muy perceptible
+
+      &:hover {
+        background-color: #99f6e4 !important; // Variación de tono para el hover sobre la oferta
+      }
+      
+      td {
+        color: #14532d; // Texto verde bosque oscuro para garantizar un contraste perfecto
+        border-top: 2px solid #4ade80 !important; // Bordes definidos en verde vivo
+        border-bottom: 2px solid #4ade80 !important;
+
+        // Borde izquierdo para enmarcar la fila
+        &:first-child {
+          border-left: 2px solid #4ade80 !important;
+        }
+
+        // Borde derecho para enmarcar la fila
+        &:last-child {
+          border-right: 2px solid #4ade80 !important;
+        }
+      }
+    }
   }
 }
 
-// 3. Contenedor simétrico para moldear las imágenes de las camisetas
-.image-wrapper {
-  width: 100%;
-  height: 220px;         // Altura fija ideal para que todas las camisetas queden alineadas
-  display: flex;
+// Contenedor simétrico para la miniatura de la camiseta
+.table-image-container {
+  width: 60px;
+  height: 60px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 4px;
   overflow: hidden;
 
   img {
-    max-width: 100%;
     max-height: 100%;
-    object-fit: contain; // Mantiene la proporción original de la camiseta sin recortarla ni estirarla
+    object-fit: contain;
+    mix-blend-mode: multiply; // Quita fondos blancos si la imagen los tiene
   }
 }
 
-// 4. Estilos tipográficos para la información de la camiseta
-.camiseta-info {
-  width: 100%;
+// Estilos modernos para los botones e insignias (Badges)
+.btn-primary {
+  background-color: #0d6efd;
+  border: none;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.2s ease;
 
-  h3 {
-    margin: 0 0 4px 0;
-    font-size: 1.15rem;
-    color: #1a202c;
-    font-weight: 700;
+  &:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
   }
 
-  .player {
-    margin: 0 0 8px 0;
-    font-size: 0.95rem;
-    color: #4a5568;
-    font-weight: 500;
+  &:active {
+    transform: translateY(0);
   }
+}
 
-  .details {
-    margin: 0 0 12px 0;
-    font-size: 0.85rem;
-    color: #718096;
-    border-top: 1px solid #edf2f7;
-    padding-top: 8px;
-  }
-
-  .price {
-    display: inline-block;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #2f855a; // Color verde para destacar el precio
-    background-color: #f0fff4;
-    padding: 4px 12px;
-    border-radius: 20px;
-  }
+.badge {
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
 }
