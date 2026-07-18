@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Camiseta } from './Camiseta';
+import { CamisetasCartService } from '../camisetas-cart';
+import { CamisetasDataService } from '../camisetas-data';
+
 
 @Component({
   selector: 'app-camisetas-list',
@@ -8,65 +11,31 @@ import { Camiseta } from './Camiseta';
   styleUrl: './camisetas-list.scss',
 })
 
-export class CamisetasList implements OnInit {
+export class CamisetasList implements OnInit{
   
-  // Agregamos una propiedad simulada de "stock" para controlar el límite del Up
-  camisetas: Camiseta[] = [
-    {
-      "team" : "Francia",
-      "player" : "Olise",
-      "year" : 2026, 
-      "brand" : "Nike", 
-      "price" : 180000, 
-      "image" : "/img/Francia2026.jpg",
-      "quantity" : 0, 
-      "clearence" : true,
-      "stock": 5 // Límite máximo de compra
-    },
-    {
-      "team" : "Argentina",
-      "player" : "Maradona",
-      "year" : 1986, 
-      "brand" : "Le Coq", 
-      "price" : 250000, 
-      "image" : "/img/argentina86.jpg",
-      "quantity" : 0, 
-      "clearence" : false,
-      "stock": 3
-    },
-    {
-      "team" : "Arsenal",
-      "player" : "Rice",
-      "year" : 2025, 
-      "brand" : "Adidas", 
-      "price" : 180000, 
-      "image" : "/img/arsenal2025.jpg",
-      "quantity" : 0, 
-      "clearence" : false,
-      "stock": 10
-    },
-    {
-      "team" : "Argentina",
-      "player" : "Messi",
-      "year" : 2006, 
-      "brand" : "Adidas", 
-      "price" : 300000, 
-      "image" : "/img/messi2006.jpg", 
-      "quantity" : 10, 
-      "clearence" : true,
-      "stock": 4
-    }
-  ];
+  camisetas : Camiseta[] = [];
+  
+  constructor(
+    private cart: CamisetasCartService,
+    private camisetasDataService: CamisetasDataService) {
+    
+  }
 
   ngOnInit(): void {
+    this.camisetasDataService.getAll()
+    .subscribe(camisetas => this.camisetas = camisetas );
   }
+
+  addToCart(camiseta:Camiseta) : void {
+    
+    if (camiseta.quantity > 0){
+      this.cart.addToCart(camiseta);
+      camiseta.stock -= camiseta.quantity;
+      camiseta.quantity = 0;}
+  }
+
 
   maxReached(mensaje: string): void {
     alert(mensaje);
-  }
-
-  // Método para el botón de Añadir
-  addToCart(camiseta: any): void {
-    console.log('Añadido al carrito:', camiseta);
   }
 }

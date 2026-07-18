@@ -24,11 +24,11 @@
       <td>{{ camiseta.year }}</td>
       <td class="text-success fw-bold">{{ camiseta.price | currency }}</td>
 
-      <!-- Muestra el stock real de forma condicional -->
       <td>
-        <span *ngIf="camiseta.stock > 0; else sinStock" class="badge bg-success">
+        <span *ngIf="(camiseta.stock) > 0; else sinStock" class="badge bg-success">
           {{ camiseta.stock }} u.
         </span>
+        
         <ng-template #sinStock>
           <span class="badge bg-danger">SIN STOCK</span>
         </ng-template>
@@ -43,22 +43,22 @@
 
       <!-- MODIFICADO: Celda con Botones e Input bidireccional [(ngModel)] sincronizado -->
       <td>
-        <app-input-integer [(quantity)]="camiseta.quantity" [max]="camiseta.stock" (maxReached)="maxReached($event)"></app-input-integer>
+        <app-input-integer 
+        [(quantity)]="camiseta.quantity" 
+        [max]="camiseta.stock" (maxReached)="maxReached($event)">
+        </app-input-integer>
       </td>
 
       <!-- Botón de acción para añadir al carrito -->
-      <td>
-        <button class="btn btn-primary btn-sm px-3 shadow-sm" 
-                (click)="addToCart(camiseta)" 
-                [disabled]="camiseta.stock === 0 || camiseta.quantity === 0">
-          Añadir
-        </button>
-      </td>
+      
+      <td> 
+        <button class="btn btn-primary" (click)="addToCart(camiseta)">Comprar</button>
+      </td> 
     </tr>
 
     <!-- Mensaje de lista vacía -->
     <tr *ngIf="camisetas.length === 0">
-      <td colspan="8" class="text-muted py-4">No hay camisetas disponibles en este momento.</td>
+      <td colspan="9" class="text-muted py-4">No hay camisetas disponibles en este momento.</td>
     </tr>
   </tbody>
 </table>

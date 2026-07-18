@@ -5,7 +5,7 @@ export interface Camiseta{
     brand : string ; 
     price : number ;
     image : string;
-    quantity : number ; 
+    quantity : number; 
     clearence : boolean; 
     stock : number;
 }
