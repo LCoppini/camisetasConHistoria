@@ -1,4 +1,4 @@
-import { Injectable, OnInit, Service } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { Camiseta } from './camisetas-list/Camiseta';
 import { BehaviorSubject } from 'rxjs';
 
@@ -17,13 +17,18 @@ export class CamisetasCartService{
 
     addToCart(camiseta: Camiseta){
         // El '!' al final le promete a TypeScript que esto nunca será undefined
-        let item: Camiseta | undefined = this._cartList.find((v1) => v1.team === camiseta.team);
+        let item: Camiseta | undefined = this._cartList.find((v1) => v1.team == camiseta.team);
             if(!item){
             this._cartList.push({... camiseta});
             }else{
                 item.quantity += camiseta.quantity;
             }
             this.cartList.next(this._cartList);
+    }
+
+    clearCart(): void {
+        this._cartList = [];
+        this.cartList.next(this._cartList);
     }
 
     

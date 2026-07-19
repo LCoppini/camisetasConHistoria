@@ -1,85 +1,25 @@
-:host {
-  display: block;
-  width: 100%;
-}
+.cart-card {
+  border-radius: 12px;
+  overflow: hidden;
+  position: sticky;
+  top: 20px;
 
-// Estructura de elementos de lista limpios
-.list-group-item {
-  background-color: transparent;
-  padding-left: 0;
-  padding-right: 0;
-  border-color: #f1f3f5 !important;
-
-  &:last-child {
-    border-bottom: none !important;
+  .card-header {
+    font-size: 1rem;
+    letter-spacing: 0.3px;
   }
-}
 
-// Detalle de ítem para evitar desbordes
-.project-item-detail {
-  flex: 1;
-  min-width: 150px;
-}
+  .list-group-item {
+    padding: 14px 16px;
+    transition: background-color 0.15s ease;
 
-// Miniatura ultra limpia como la del código del amigo
-.cart-thumb {
-  width: 55px;
-  height: 55px;
-  object-fit: contain;
-  background-color: #f8f9fa;
-  border: 1px solid #e9ecef;
-  border-radius: 8px;
-  padding: 4px;
-  mix-blend-mode: multiply; // Remueve fondos blancos de las fotos
-}
-
-// Botones de cantidad compactos micro (btn-xs)
-.btn-outline-secondary {
-  border-color: #dee2e6;
-  color: #495057;
-  font-weight: 600;
-  padding: 1px 8px;
-  border-radius: 4px;
-  transition: all 0.15s ease;
-
-  &:hover {
-    background-color: #212529;
-    border-color: #212529;
-    color: #ffffff;
+    &:hover {
+      background-color: #f8f9fa;
+    }
   }
-}
 
-// Botón Tacho de Basura minificado
-.btn-outline-danger {
-  border: 1px solid transparent;
-  background-color: transparent;
-  font-size: 0.95rem;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background-color: #fff5f5;
-    border-color: #ffe3e3;
-  }
-}
-
-// Caja del Total inferior
-.bg-light {
-  background-color: #f8f9fa !important;
-  border-color: #e9ecef !important;
-}
-
-// Botón de compra moderno
-.btn-primary {
-  background-color: #0d6efd;
-  border: none;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background-color: #0b5ed7;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(13, 110, 253, 0.15);
+  .card-footer {
+    border-top: 2px solid #e9ecef;
+    padding: 16px;
   }
 }

@@ -6,6 +6,6 @@ export interface Camiseta{
     price : number ;
     image : string;
     quantity : number; 
-    clearence : boolean; 
+    clearance : boolean; 
     stock : number;
 }

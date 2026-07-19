@@ -1,64 +1,60 @@
 <h3 class="mt-4 mb-3 fw-bold">👕 Camisetas Disponibles</h3>
 
-<table class="table text-center align-middle">
-  <thead>
-    <tr>
-      <th>Modelo / Jugador</th>
-      <th>Marca</th>
-      <th>Año</th>
-      <th>Precio</th>
-      <th>Stock</th>
-      <th>Imagen</th>
-      <th>Cantidad</th>
-      <th>Comprar</th>
-    </tr>
-  </thead>
-  <tbody>
-   
-    <!-- Bucle principal de camisetas -->
-    <tr *ngFor="let camiseta of camisetas" [class.clearance]="camiseta.clearence">
-      
-      <!-- Datos básicos -->
-      <td class="fw-bold">{{ camiseta.team }} - {{ camiseta.player }}</td>
-      <td>{{ camiseta.brand }}</td>
-      <td>{{ camiseta.year }}</td>
-      <td class="text-success fw-bold">{{ camiseta.price | currency }}</td>
+<div class="row">
 
-      <td>
-        <span *ngIf="(camiseta.stock) > 0; else sinStock" class="badge bg-success">
-          {{ camiseta.stock }} u.
-        </span>
-        
-        <ng-template #sinStock>
-          <span class="badge bg-danger">SIN STOCK</span>
-        </ng-template>
-      </td>
+  <!-- Columna de camisetas -->
+  <div class="col-9">
+    <div class="row g-3">
+      <ng-container *ngIf="camisetas$ | async as camisetas">
 
-      <!-- Imagen -->
-      <td>
-        <div class="table-image-container">
-          <img [src]="camiseta.image" [alt]="camiseta.team" class="img-fluid">
+        <div class="col-12 col-md-6 col-lg-4" *ngFor="let camiseta of camisetas">
+          <div class="card h-100 shadow-sm camiseta-card" [class.clearance]="camiseta.clearance">
+            
+            <div class="camiseta-img-wrapper">
+              <img [src]="camiseta.image" [alt]="camiseta.team" class="card-img-top">
+            </div>
+
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title fw-bold mb-1">{{ camiseta.team }} - {{ camiseta.player }}</h5>
+              <p class="text-muted mb-2">{{ camiseta.brand }} · {{ camiseta.year }}</p>
+
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="fs-5 fw-bold text-success">{{ camiseta.price | currency }}</span>
+                <span *ngIf="camiseta.stock > 0; else sinStock" class="badge bg-success">
+                  {{ camiseta.stock }} u.
+                </span>
+                <ng-template #sinStock>
+                  <span class="badge bg-danger">SIN STOCK</span>
+                </ng-template>
+              </div>
+
+              <div class="mt-auto">
+                <app-input-integer 
+                  [(quantity)]="camiseta.quantity" 
+                  [max]="camiseta.stock" 
+                  (maxReached)="maxReached($event)">
+                </app-input-integer>
+
+                <button class="btn btn-primary w-100 mt-2" (click)="addToCart(camiseta)">
+                  Comprar
+                </button>
+              </div>
+            </div>
+
+          </div>
         </div>
-      </td>
 
-      <!-- MODIFICADO: Celda con Botones e Input bidireccional [(ngModel)] sincronizado -->
-      <td>
-        <app-input-integer 
-        [(quantity)]="camiseta.quantity" 
-        [max]="camiseta.stock" (maxReached)="maxReached($event)">
-        </app-input-integer>
-      </td>
+        <div class="col-12" *ngIf="camisetas.length === 0">
+          <p class="text-muted text-center py-4">No hay camisetas disponibles en este momento.</p>
+        </div>
 
-      <!-- Botón de acción para añadir al carrito -->
-      
-      <td> 
-        <button class="btn btn-primary" (click)="addToCart(camiseta)">Comprar</button>
-      </td> 
-    </tr>
+      </ng-container>
+    </div>
+  </div>
 
-    <!-- Mensaje de lista vacía -->
-    <tr *ngIf="camisetas.length === 0">
-      <td colspan="9" class="text-muted py-4">No hay camisetas disponibles en este momento.</td>
-    </tr>
-  </tbody>
-</table>
+  <!-- Columna del carrito -->
+  <div class="col-3">
+    <app-cart></app-cart>
+  </div>
+
+</div>

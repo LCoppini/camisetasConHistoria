@@ -24,4 +24,8 @@ export class CartComponent implements OnInit {
   getTotal(products: Camiseta[]): number {
     return products.reduce((acc, p) => acc + (p.price * p.quantity), 0);
   }
+
+  clearCart(): void {
+    this.cart.clearCart();
+  }
 }

@@ -1,120 +1,32 @@
-// Contenedor general de la tabla para aplicar bordes redondeados modernos
-table.table {
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 1px solid #e9ecef;
+.camiseta-card {
   border-radius: 12px;
-  overflow: hidden; // Corta las esquinas para mantener el redondeado
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  border: 1px solid #e9ecef;
 
-  // Estilos para el encabezado de la tabla
-  thead {
-    tr {
-      background-color: #f8f9fa;
-      
-      th {
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-weight: 700;
-        color: #495057;
-        padding: 16px;
-        border-bottom: 2px solid #dee2e6;
-      }
-    }
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
   }
 
-  // Estilos para el cuerpo de la tabla
-  tbody {
-    tr {
-      transition: background-color 0.2s ease;
-
-      // Efecto sutil al pasar el mouse sobre una fila normal
-      &:hover {
-        background-color: #fdfdfd;
-      }
-
-      td {
-        padding: 16px;
-        color: #4a5568;
-        border-bottom: 1px solid #edf2f7;
-      }
-
-      // Elimina el borde de la última fila para que no rompa el diseño redondeado
-      &:last-child td {
-        border-bottom: none;
-      }
-    }
-
-    // MODIFICADO: Relleno verde intermedio con mayor presencia e intensidad
-    tr.clearance {
-      background-color: #bbf7d0 !important; // Verde menta intermedio muy perceptible
-
-      &:hover {
-        background-color: #99f6e4 !important; // Variación de tono para el hover sobre la oferta
-      }
-      
-      td {
-        color: #14532d; // Texto verde bosque oscuro para garantizar un contraste perfecto
-        border-top: 2px solid #4ade80 !important; // Bordes definidos en verde vivo
-        border-bottom: 2px solid #4ade80 !important;
-
-        // Borde izquierdo para enmarcar la fila
-        &:first-child {
-          border-left: 2px solid #4ade80 !important;
-        }
-
-        // Borde derecho para enmarcar la fila
-        &:last-child {
-          border-right: 2px solid #4ade80 !important;
-        }
-      }
-    }
+  &.clearance {
+    border: 2px solid #4ade80;
+    background-color: #f0fdf4;
   }
 }
 
-// Contenedor simétrico para la miniatura de la camiseta
-.table-image-container {
-  width: 60px;
-  height: 60px;
-  display: inline-flex;
+.camiseta-img-wrapper {
+  height: 200px;
+  display: flex;
   align-items: center;
   justify-content: center;
   background-color: #f8f9fa;
-  border: 1px solid #e9ecef;
-  border-radius: 8px;
-  padding: 4px;
-  overflow: hidden;
+  padding: 16px;
 
   img {
     max-height: 100%;
+    max-width: 100%;
     object-fit: contain;
-    mix-blend-mode: multiply; // Quita fondos blancos si la imagen los tiene
+    mix-blend-mode: multiply;
   }
-}
-
-// Estilos modernos para los botones e insignias (Badges)
-.btn-primary {
-  background-color: #0d6efd;
-  border: none;
-  font-weight: 500;
-  border-radius: 6px;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background-color: #0b5ed7;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-}
-
-.badge {
-  padding: 6px 10px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  border-radius: 6px;
 }

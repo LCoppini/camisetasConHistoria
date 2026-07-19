@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Camiseta } from './Camiseta';
 import { CamisetasCartService } from '../camisetas-cart';
 import { CamisetasDataService } from '../camisetas-data';
-
 
 @Component({
   selector: 'app-camisetas-list',
@@ -10,30 +10,26 @@ import { CamisetasDataService } from '../camisetas-data';
   templateUrl: './camisetas-list.html',
   styleUrl: './camisetas-list.scss',
 })
+export class CamisetasList implements OnInit {
 
-export class CamisetasList implements OnInit{
-  
-  camisetas : Camiseta[] = [];
-  
+  camisetas$!: Observable<Camiseta[]>;
+
   constructor(
     private cart: CamisetasCartService,
     private camisetasDataService: CamisetasDataService) {
-    
   }
 
   ngOnInit(): void {
-    this.camisetasDataService.getAll()
-    .subscribe(camisetas => this.camisetas = camisetas );
+    this.camisetas$ = this.camisetasDataService.getAll();
   }
 
-  addToCart(camiseta:Camiseta) : void {
-    
-    if (camiseta.quantity > 0){
+  addToCart(camiseta: Camiseta): void {
+    if (camiseta.quantity > 0) {
       this.cart.addToCart(camiseta);
       camiseta.stock -= camiseta.quantity;
-      camiseta.quantity = 0;}
+      camiseta.quantity = 0;
+    }
   }
-
 
   maxReached(mensaje: string): void {
     alert(mensaje);
