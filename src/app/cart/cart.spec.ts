@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms'; // Añadido para que el test entienda ngModel si lo usas
-import { CartComponent } from './cart'; // CORRECCIÓN: Nombre de la clase real
+import { FormsModule } from '@angular/forms'; 
+import { CartComponent } from './cart';
 
 describe('CartComponent', () => {
-  let component: CartComponent; // CORRECCIÓN: Tipo correcto
-  let fixture: ComponentFixture<CartComponent>; // CORRECCIÓN: Tipo correcto
+  let component: CartComponent; 
+  let fixture: ComponentFixture<CartComponent>; 
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CartComponent], // CORRECCIÓN: Declaración correcta
-      imports: [FormsModule] // Consejo útil: Evita que el test falle por culpa de formularios
+      declarations: [CartComponent], 
+      imports: [FormsModule] 
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CartComponent); // CORRECCIÓN: Creación correcta
+    fixture = TestBed.createComponent(CartComponent); 
     component = fixture.componentInstance;
-    fixture.detectChanges(); // Reemplazado por detectChanges para inicializar el ciclo de vida de Angular
+    fixture.detectChanges(); 
   });
 
   it('should create', () => {

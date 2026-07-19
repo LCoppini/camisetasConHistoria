@@ -9,14 +9,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <!-- Usamos routerLink en lugar de href para navegar sin recargar la página -->
+        
         <a class="nav-link" [routerLink]="['/camisetas']">Camisetas</a>
         <a class="nav-link" [routerLink]="['/about']">About</a>
       </div>
     </div>
   </div>
 </nav>
-<!-- El contenedor dinámico donde se inyectarán las páginas -->
+
 <div class="container mt-4">
   <router-outlet></router-outlet>
 </div>

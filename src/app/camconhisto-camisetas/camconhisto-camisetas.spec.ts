@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CamconhistoCamisetas } from './camconhisto-camisetas';
+import { CamConHistoCamisetas } from './camconhisto-camisetas';
 
-describe('CamconhistoCamisetas', () => {
-  let component: CamconhistoCamisetas;
-  let fixture: ComponentFixture<CamconhistoCamisetas>;
+describe('CamConHistoCamisetas', () => {
+  let component: CamConHistoCamisetas;
+  let fixture: ComponentFixture<CamConHistoCamisetas>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CamconhistoCamisetas],
+      declarations: [CamConHistoCamisetas],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CamconhistoCamisetas);
+    fixture = TestBed.createComponent(CamConHistoCamisetas);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

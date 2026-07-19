@@ -20,7 +20,7 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // Corregido: Agregamos tu función de totalizar usando reduce de forma limpia
+  // Corregido: agregamos tu función de totalizar usando reduce de forma limpia
   getTotal(products: Camiseta[]): number {
     return products.reduce((acc, p) => acc + (p.price * p.quantity), 0);
   }

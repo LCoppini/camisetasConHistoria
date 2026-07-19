@@ -17,7 +17,7 @@ import {HttpClient,HttpClientModule} from  '@angular/common/http';
   declarations: [
     App,
     CamisetasList,
-    CartComponent, // CORRECCIÓN: Se cambió 'CamisetasCarrito' y 'Cart' por 'CartComponent'
+    CartComponent, 
     CamConHistoCamisetas,
     CamisetasAbout,
     InputInteger,

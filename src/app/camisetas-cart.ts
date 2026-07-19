@@ -16,7 +16,7 @@ export class CamisetasCartService{
     constructor(){}
 
     addToCart(camiseta: Camiseta){
-        // El '!' al final le promete a TypeScript que esto nunca será undefined
+        
         let item: Camiseta | undefined = this._cartList.find((v1) => v1.team == camiseta.team);
             if(!item){
             this._cartList.push({... camiseta});

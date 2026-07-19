@@ -48,7 +48,7 @@ export class InputInteger implements OnInit {
 
     if (this.quantity > this.max) {
       this.quantity = this.max; 
-      // Opcional: También podrías disparar el evento aquí si lo escriben a mano
+      
       this.maxReached.emit(`No puedes superar el stock máximo de ${this.max}.`);
     }
 

@@ -3,13 +3,10 @@
          <button type="button" class="btn btn-primary btn-sm px-2 fw-bold" (click)="downQuantity()">
         -
         </button>
-          
-          <!-- Input interactivo enlazado a la propiedad quantity -->
-          <!-- Input interactivo enlazado únicamente con ngModel -->
         <input type="number" 
-       class="form-control text-center mx-auto" 
-       [(ngModel)]="quantity" 
-       (keyup)="changeQuantity($event)">
+        class="form-control text-center mx-auto" 
+        [(ngModel)]="quantity" 
+        (keyup)="changeQuantity($event)">
 
           <!-- Botón de más (+) -->
         <button type="button" class="btn btn-primary btn-sm px-2 fw-bold" (click)="upQuantity()"> +
